@@ -1,0 +1,11 @@
+Flask>=2.0.0
+Flask-SQLAlchemy>=2.5.1
+Flask-Migrate>=3.1.0
+psycopg2-binary>=2.9.3  # for postgres
+python-dotenv>=0.19.2   # for ENV variables
+
+# For type hints and development
+mypy>=0.971
+flake8>=4.0.1
+black>=22.3.0
+flask-cors>=3.0.10

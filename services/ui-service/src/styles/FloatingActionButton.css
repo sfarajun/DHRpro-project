@@ -1,0 +1,28 @@
+/* FloatingActionButton styles */
+
+.floating-action-button-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.floating-action-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.floating-action-button-label {
+  font-size: 16px;
+  color: #007bff;
+  font-weight: 500;
+}

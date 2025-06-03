@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+
+  backend-service:
+    build: ./services/backend-service
+    container_name: backend-service
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://appuser:password@app-db:5432/appdb
+    depends_on:
+      - app-db
+    volumes:
+      - ./services/backend-service:/app  # this line mounts your source code
+      - ./services/backend-service/migrations:/app/migrations  # this persists migrations
+
+  app-db:
+    image: postgres:14
+    container_name: app-db
+    environment:
+      - POSTGRES_USER=appuser
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=appdb
+    volumes:
+      - app-db-data:/var/lib/postgresql/data
+
+
+# --------FOR DEV--------
+  ui-service:
+    build:
+      context: ./services/ui-service
+    container_name: ui-service
+    ports:
+      - "3000:3000"  # React dev server listens on 3000
+    volumes:
+      - ./services/ui-service:/app  # sync code for live reload
+      - /app/node_modules           # avoid overwriting node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend-service
+
+# --------FOR PROD ----------
+  # ui-service:
+  #   build:
+  #     context: ./services/ui-service  # point this to your React app folder
+  #   container_name: ui-service
+  #   ports:
+  #     - "3000:80"                    # maps container's nginx port 80 to host 3000
+  #   depends_on:
+  #     - backend-service
+
+volumes:
+  app-db-data:
+  
