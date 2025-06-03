@@ -31,7 +31,6 @@ class Task(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     project_id = db.Column(db.Integer, nullable=False)
-    # title = db.Column(db.String(128), nullable=False)
     name = db.Column(db.String(128), nullable=False)
     description = db.Column(db.Text, nullable=True)
     status = db.Column(db.String(32), nullable=False, default='pending')
@@ -43,7 +42,6 @@ class Task(db.Model):
         return {
             'id': self.id,
             'project_id': self.project_id,
-            # 'title': self.title,
             'name': self.name,
             'description': self.description,
             'status': self.status,
